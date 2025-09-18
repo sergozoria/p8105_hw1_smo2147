@@ -16,6 +16,8 @@ library(moderndive)
 
 # Problem 1
 
+#### Description of Dataset
+
 We will now access the penguins dataset and provide a short description of the data using inline R code.
 
 ```{r describing dataset}
@@ -23,3 +25,18 @@ data("early_january_weather")
 ```
 
 The penguins dataset has **`r nrow(early_january_weather)` rows** and **`r ncol(early_january_weather)` columns**. One important variable that stands out in this dataset is the **temperature** variable (i.e., `temp`), along with time of the hour (i.e., `time_hour`) and the wind speed (ie., `wind_speed`), which are critical in regulating/influencing temperature levels. It is important to note that the average temperature has a mean of **`r mean(early_january_weather$temp)`** in Fahrenheit. 
+
+Here's a list of the remaining variables in the dataset:
+
+* `origin`
+* `year`
+* `month`
+* `hour`
+* `day`
+* `dewp`
+* `humid`
+* `wind_dir`
+* `wind_gust`
+* `precip`
+* `pressure`
+* `visib`
