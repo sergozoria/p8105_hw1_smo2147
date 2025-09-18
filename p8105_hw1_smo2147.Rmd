@@ -26,23 +26,27 @@ data("early_january_weather")
 
 The penguins dataset has **`r nrow(early_january_weather)` rows** and **`r ncol(early_january_weather)` columns**. One important variable that stands out in this dataset is the **temperature** variable (i.e., `temp`), along with hour (i.e., `hour`) and the wind speed (i.e., `wind_speed`), which are critical in regulating/influencing temperature levels. It is important to note that the average temperature has a mean of **`r early_january_weather |> pull(temp) |> mean()`** in Fahrenheit. Moreover, the average hour is **`r early_january_weather |> pull(hour) |> mean()`** and the average wind speed is **`r early_january_weather |> pull(wind_speed) |> mean()`**.
 
-Here's a list of the remaining variables in the dataset:
+The following table describes variables that were also used to capture observations in weather patterns in the month of January, year 2023:
 
-* `origin`
-* `year`
-* `month`
-* `hour`
-* `day`
-* `dewp`
-* `humid`
-* `wind_dir`
-* `wind_gust`
-* `precip`
-* `pressure`
-* `visib`
-* `time_hour`
+Variable   | Description
+---------- | -----------
+`origin`   | Location where the weather observation was recorded
+`year`     | Year of observation
+`month`    | Month of observation
+`hour`     | Hour of the day
+`day`      | Day of the month of observation
+`dewp`     | Dew point temperature, indicating moisture in air
+`humid`    | Humidity at time of observation
+`wind_dir` | Wind direction at time of observation
+`wind_gust`| Peak instantaneous wind speed at observation
+`precip`   | Precipiation at the time of observation
+`pressure` | Atmospheric pressure at time of observation
+`visib`    | Visibility at time of observation
+`time_hour`| Time and hour at the time of observation
 
 #### Dataframe for Scatterplot
+
+Before we plot what the temperature by the hour looks like in a scattersplot, let's use the selection function to create a dataframe for the variables `time_hour`, `temp`, and `humid`.
 
 ```{r}
 weather_df =
@@ -67,6 +71,12 @@ ggplot(
     y = "Temperature (°F)", 
     color = "Humidity (%)") +
   ggtitle("Temperature by Hour") +
-  theme(plot.title = element_text(hjust = 0.25))
+  theme(plot.title 
+        = element_text
+        (hjust = 0.5)
+      )
 ```
 
+This scatterplot is depicts temperature patterns over time, as well as changes in humidity levels throughout January. As the temperature rises over the course of the month, humidity levels also tend to increase. It is important to note that humidity levels are generally lower in the mornings and higher in the afternoons, reflecting daily fluctuations in the temperature. This could be caused by rises in the sun's temperature and cooling of the Earth's surface.
+
+# Problem 2
