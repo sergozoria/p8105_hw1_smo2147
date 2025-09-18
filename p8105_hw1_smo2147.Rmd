@@ -7,10 +7,17 @@ output: github_document
 
 # Initial Setup
 
-Loading the tidyverse package for scatterplot + moderndive package to access the penguins dataset
+Loading the tidyverse package for scatterplot + moderndive package to access the penguins dataset.
 
-```{r initial setup, eval = FALSE}
+```{r initial setup, message = FALSE}
 library(tidyverse)
 library(moderndive)
 ```
 
+# Problem 1
+
+```{r describing dataset}
+data("early_january_weather")
+```
+
+The penguins dataset has **`r nrow(early_january_weather)` rows** and **`r ncol(early_january_weather)` columns**. One important variable that stands out in this dataset is the **temperature** variable (i.e., `temp`), along with time of the hour (i.e., `time_hour`) and the wind speed (ie., `wind_speed`), which are critical in regulating/influencing temperature levels. It is important to note that the average temperature has a mean of **`r mean(early_january_weather$temp)`** in Fahrenheit. 
