@@ -40,3 +40,19 @@ Here's a list of the remaining variables in the dataset:
 * `precip`
 * `pressure`
 * `visib`
+
+#### Dataframe for Scatterplot
+
+```{r}
+weather_df =
+  tibble(time_hour = early_january_weather$time_hour, temp = early_january_weather$temp, humid = early_january_weather$humid)
+```
+
+#### Plotting Scatterplot
+
+We will now plot the variables `temp` and `time_hour` to see how the temperature changed by the hour.
+
+```{r}
+ggplot(weather_df, aes(x = time_hour, y = temp, color = humid)) + geom_point() + labs(x = "Month & Time", y = "Temperature (Fahrenheit)", color = "Humidity (%)")
+```
+
