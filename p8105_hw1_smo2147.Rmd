@@ -1,0 +1,16 @@
+---
+title: "Homework 1"
+author: "Sergio Ozoria Ramírez (smo2147)"
+date: "2025-09-18"
+output: github_document
+---
+
+# Initial Setup
+
+Loading the tidyverse package for scatterplot + moderndive package to access the penguins dataset
+
+```{r initial setup, eval = FALSE}
+library(tidyverse)
+library(moderndive)
+```
+
