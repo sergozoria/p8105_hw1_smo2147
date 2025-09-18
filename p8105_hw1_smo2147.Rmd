@@ -16,6 +16,8 @@ library(moderndive)
 
 # Problem 1
 
+We will now access the penguins dataset and provide a short description of the data using inline R code.
+
 ```{r describing dataset}
 data("early_january_weather")
 ```
