@@ -18,13 +18,13 @@ library(moderndive)
 
 #### Description of Dataset
 
-We will now access the penguins dataset and provide a short description of the data using inline R code.
+We will now access the weather dataset and provide a short description of the data using inline R code.
 
 ```{r describing dataset}
 data("early_january_weather")
 ```
 
-The penguins dataset has **`r nrow(early_january_weather)` rows** and **`r ncol(early_january_weather)` columns**. One important variable that stands out in this dataset is the **temperature** variable (i.e., `temp`), along with hour (i.e., `hour`) and the wind speed (i.e., `wind_speed`), which are critical in regulating/influencing temperature levels. It is important to note that the average temperature has a mean of **`r early_january_weather |> pull(temp) |> mean()`** in Fahrenheit. Moreover, the average hour is **`r early_january_weather |> pull(hour) |> mean()`** and the average wind speed is **`r early_january_weather |> pull(wind_speed) |> mean()`** in the month of January, 2023.
+The weather dataset has **`r nrow(early_january_weather)` rows** and **`r ncol(early_january_weather)` columns**. One important variable that stands out in this dataset is the **temperature** variable (i.e., `temp`), along with hour (i.e., `hour`) and the wind speed (i.e., `wind_speed`), which are critical in regulating/influencing temperature levels. It is important to note that the average temperature has a mean of **`r early_january_weather |> pull(temp) |> mean()`** in Fahrenheit. Moreover, the average hour is **`r early_january_weather |> pull(hour) |> mean()`** and the average wind speed is **`r early_january_weather |> pull(wind_speed) |> mean()`** in the month of January, 2023.
 
 The following table describes the remaining variables that were also used to capture observations in weather patterns in the month of January, year 2023:
 
@@ -39,7 +39,7 @@ Variable   | Description
 `humid`    | Humidity at time of observation
 `wind_dir` | Wind direction at time of observation
 `wind_gust`| Peak instantaneous wind speed at observation
-`precip`   | Precipiation at the time of observation
+`precip`   | Precipitation at the time of observation
 `pressure` | Atmospheric pressure at time of observation
 `visib`    | Visibility at time of observation
 `time_hour`| Time and hour at the time of observation
@@ -70,11 +70,13 @@ ggplot(
     x = "Hour of the Day", 
     y = "Temperature (°F)", 
     color = "Humidity (%)") +
-  ggtitle("Temperature Patterns by Time and Hour in January, 2023") +
-  theme(plot.title 
-        = element_text
+  ggtitle("Temperature Patterns by Time and Hour in January,
+    2023") +
+  theme_minimal() +
+  theme(plot.title = 
+          element_text 
         (hjust = 0.5)
-      )
+        )
 ```
 
 This scatterplot depicts temperature patterns over time, as well as changes in humidity levels throughout the month of January in 2023. As the temperature rises by the hour over the course of the month, humidity levels also tend to increase. It is important to note that humidity levels are generally lower in the mornings and higher in the afternoons, reflecting daily fluctuations in the temperature. This could be caused by rises in the sun's temperature and cooling of the Earth's surface.
@@ -103,17 +105,21 @@ set.seed(123)
 rsamp_df = tibble(
   norm_rsamp = rnorm(10, mean = 0, sd = 1),
   gt_zero = norm_rsamp > 0,
-  char_vec = as.character(letters[1:10]),
+  char_vec = as.character(1:10),
   factor_vec = factor(
-    sample(c("Level 1", "Level 2", "Level 3"), 10, TRUE),
-  levels = c("Level 1", "Level 2", "Level 3")
+    c("chicken", "rice", "beans", "chicken",
+      "rice", "beans", "chicken", "rice",
+      "beans", "chicken"),
+  levels = c("chicken", "rice", "beans")
   )
 )
 ```
 
+##### Means of Each Vector in `rsamp_df`
+
 We will now take the mean for each variable listed in the random sample dataframe (i.e., `rsamp_df`) listed above.`
 
-```{r collapse = TRUE}
+```{r pulling the mean, collapse = TRUE}
 rsamp_df |> 
   pull(norm_rsamp) |> 
   mean()
@@ -133,14 +139,13 @@ rsamp_df |>
 
 Based on these results, we are able to get the mean for the variables `norm_rsamp` and `gt_zero`. This is beause `norm_rsamp` is averaging each random, numeric observation from the sample, whereas R is coercing **TRUE** and **FALSE** values in `gt_zero` as 1 and 0, respectively, which allows us to make operations such as the mean.
 
-However, we are unable to calculate the mean for the variables `char_vec` and `factor_vec`.  This is because `char_vec` is treating the data as text. Even if its observations were numbers, R will treat all contents in the character vector as texts. In the case `factor_vec`, it is encoding a vector as categorical data, thus lacking numerical value to get the mean or statistical validity from numbers that are assigned to categories.
-
+However, we are unable to calculate the mean for the variables `char_vec` and `factor_vec`. This is because `char_vec` is treating the data as text. Even if its observations were numbers, R will treat all contents in the character vector as texts. In the case `factor_vec`, it is encoding a vector as categorical data, thus lacking numerical value to get the mean or statistical validity from numbers that are assigned to categories. Therefore, when we evaluate these variables, the output will return as **NA** because the argument is not numeric or logical.
 
 #### Coercion of Different Data Types
 
-We will now attempt to convert all vector variables in my dataframe, `rsamp_df`, to numeric values using the `as.numerci` function.
+We will now attempt to convert all vector variables in my dataframe, `rsamp_df`, to numeric values using the `as.numeric` function without evaluating its output.
 
-```{r eval = FALSE}
+```{r coercing vectors, eval = FALSE}
 rsamp_df |> 
   mutate(
     gt_zero_an = gt_zero |> 
@@ -151,3 +156,9 @@ rsamp_df |>
       as.numeric()
   )
 ```
+
+After coercing logical, character, and factor variables to numeric values, we can see that the function `as.numeric` converts the values **TRUE** and **FALSE** as binary outcomes of 1 and 0, respectively for the variable `gt_zero`. Calculating the mean for this logical variable using values of 1 and 0, or **TRUE** and **FALSE**, will yield a mean averaging to 0.5. This is only dependent on how many values are either false or true. 
+
+In the case of the variable `char_vec`, we can see that the values did not change at the time of conversion, as the character vector already contained numerical values, which would allows us to calculate the mean, averaging to 5.5. However, if the character value contained text instead of numbers, the output would yield NA values at the time of coercion because letters cannot be turned into a number.
+
+In the case of the variable `factor_vec`, we can see that each category is assigned a numerical integer based on the levels of the factor (i.e., 1 for chicken, 2 for rice, and 3 for beans). This allows us to calculate a mean averaging to 1.9. However, this mean wouldn't be meaningful because we're assigning order to categorical data. 
