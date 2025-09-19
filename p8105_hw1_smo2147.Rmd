@@ -48,7 +48,7 @@ Variable   | Description
 
 Before we plot what the temperature by the hour looks like in a scattersplot, let's use the selection function to create a dataframe for the variables `time_hour`, `temp`, and `humid`.
 
-```{r}
+```{r creating dataframe}
 weather_df =
   early_january_weather |>
   select(time_hour, temp, humid
@@ -59,7 +59,7 @@ weather_df =
 
 We will now plot the variables `temp` and `time_hour` to see how the temperature changed by the hour.
 
-```{r}
+```{r plotting weather patterns}
 ggplot(
   weather_df, aes
        (x = time_hour, 
@@ -78,6 +78,14 @@ ggplot(
 ```
 
 This scatterplot depicts temperature patterns over time, as well as changes in humidity levels throughout the month of January in 2023. As the temperature rises by the hour over the course of the month, humidity levels also tend to increase. It is important to note that humidity levels are generally lower in the mornings and higher in the afternoons, reflecting daily fluctuations in the temperature. This could be caused by rises in the sun's temperature and cooling of the Earth's surface.
+
+#### Exporting Scatterplot
+
+Let's now save the scatterplot depicting temperature patterns by time and hour to my project directory.
+
+```{r exporting scatterplot}
+ggsave("temp_thour_sctplot.pdf", height = 4, width = 6)
+```
 
 # Problem 2
 
@@ -117,7 +125,7 @@ rsamp_df |>
 
 Let's note convert variables from one type to another
 
-```{r}
+```{r eval = FALSE}
 rsamp_df |> 
   mutate(
     gt_zero_an = gt_zero |> 
