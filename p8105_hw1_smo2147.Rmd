@@ -67,7 +67,7 @@ ggplot(
         color = humid)) + 
   geom_point() + 
   labs(
-    x = "Hour of the Day", 
+    x = "Time and Hour", 
     y = "Temperature (°F)", 
     color = "Humidity (%)") +
   ggtitle("Temperature Patterns by Time and Hour in January,
@@ -157,8 +157,8 @@ rsamp_df |>
   )
 ```
 
-After coercing logical, character, and factor variables to numeric values, we can see that the function `as.numeric` converts the values **TRUE** and **FALSE** as binary outcomes of 1 and 0, respectively for the variable `gt_zero`. Calculating the mean for this logical variable using values of 1 and 0, or **TRUE** and **FALSE**, will yield a mean averaging to 0.5. This is only dependent on how many values are either false or true. 
+After coercing logical, character, and factor variables to numeric values, we can see that the function `as.numeric` converts the values **TRUE** and **FALSE** as binary outcomes of 1 and 0, respectively for the variable `gt_zero`. Calculating the mean for this logical variable using values of 1 and 0, or **TRUE** and **FALSE**, will yield a mean averaging to **0.5**. This is only dependent on how many values are either false or true. 
 
-In the case of the variable `char_vec`, we can see that the values did not change at the time of conversion, as the character vector already contained numerical values, which would allows us to calculate the mean, averaging to 5.5. However, if the character value contained text instead of numbers, the output would yield NA values at the time of coercion because letters cannot be turned into a number.
+In the case of the variable `char_vec`, we can see that the values did not change at the time of conversion, as the character vector already contained numerical values, which would allows us to calculate the mean, averaging to **5.5**. However, if the character value contained text instead of numbers, the output would yield **NA** values at the time of coercion because letters cannot be turned into a number.
 
-In the case of the variable `factor_vec`, we can see that each category is assigned a numerical integer based on the levels of the factor (i.e., 1 for chicken, 2 for rice, and 3 for beans). This allows us to calculate a mean averaging to 1.9. However, this mean wouldn't be meaningful because we're assigning order to categorical data. 
+In the case of the variable `factor_vec`, we can see that each category is assigned a numerical integer based on the levels of the factor (i.e., 1 for chicken, 2 for rice, and 3 for beans). This allows us to calculate a mean averaging to **1.9**. However, this mean wouldn't be meaningful because we're assigning order to categorical data. 
