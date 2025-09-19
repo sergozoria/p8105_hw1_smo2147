@@ -24,9 +24,9 @@ We will now access the penguins dataset and provide a short description of the d
 data("early_january_weather")
 ```
 
-The penguins dataset has **`r nrow(early_january_weather)` rows** and **`r ncol(early_january_weather)` columns**. One important variable that stands out in this dataset is the **temperature** variable (i.e., `temp`), along with hour (i.e., `hour`) and the wind speed (i.e., `wind_speed`), which are critical in regulating/influencing temperature levels. It is important to note that the average temperature has a mean of **`r early_january_weather |> pull(temp) |> mean()`** in Fahrenheit. Moreover, the average hour is **`r early_january_weather |> pull(hour) |> mean()`** and the average wind speed is **`r early_january_weather |> pull(wind_speed) |> mean()`**.
+The penguins dataset has **`r nrow(early_january_weather)` rows** and **`r ncol(early_january_weather)` columns**. One important variable that stands out in this dataset is the **temperature** variable (i.e., `temp`), along with hour (i.e., `hour`) and the wind speed (i.e., `wind_speed`), which are critical in regulating/influencing temperature levels. It is important to note that the average temperature has a mean of **`r early_january_weather |> pull(temp) |> mean()`** in Fahrenheit. Moreover, the average hour is **`r early_january_weather |> pull(hour) |> mean()`** and the average wind speed is **`r early_january_weather |> pull(wind_speed) |> mean()`** in the month of January, 2023.
 
-The following table describes variables that were also used to capture observations in weather patterns in the month of January, year 2023:
+The following table describes the remaining variables that were also used to capture observations in weather patterns in the month of January, year 2023:
 
 Variable   | Description
 ---------- | -----------
@@ -70,13 +70,48 @@ ggplot(
     x = "Hour of the Day", 
     y = "Temperature (°F)", 
     color = "Humidity (%)") +
-  ggtitle("Temperature by Hour") +
+  ggtitle("Temperature Patterns by Time and Hour in January, 2023") +
   theme(plot.title 
         = element_text
         (hjust = 0.5)
       )
 ```
 
-This scatterplot is depicts temperature patterns over time, as well as changes in humidity levels throughout January. As the temperature rises over the course of the month, humidity levels also tend to increase. It is important to note that humidity levels are generally lower in the mornings and higher in the afternoons, reflecting daily fluctuations in the temperature. This could be caused by rises in the sun's temperature and cooling of the Earth's surface.
+This scatterplot depicts temperature patterns over time, as well as changes in humidity levels throughout the month of January in 2023. As the temperature rises by the hour over the course of the month, humidity levels also tend to increase. It is important to note that humidity levels are generally lower in the mornings and higher in the afternoons, reflecting daily fluctuations in the temperature. This could be caused by rises in the sun's temperature and cooling of the Earth's surface.
 
 # Problem 2
+
+```{r}
+set.seed(123)
+
+rsamp_df = tibble(
+  norm_rsamp = rnorm(10, mean = 0, sd = 1),
+  gt_zero = norm_rsamp > 0,
+  char_vec = as.character(letters[1:10]),
+  factor_vec = factor(
+    sample(c("Level 1", "Level 2", "Level 3"), 10, TRUE),
+  levels = c("Level 1", "Level 2", "Level 3")
+  )
+)
+```
+
+Let's now calculate the mean for each variable in `rsamp_df`
+
+```{r}
+rsamp_df |> 
+  pull(norm_rsamp) |> 
+  mean()
+
+rsamp_df |> 
+  pull(gt_zero) |> 
+  mean()
+
+rsamp_df |> 
+  pull(char_vec) |> 
+  mean()
+
+rsamp_df |> 
+  pull(factor_vec) |> 
+  mean()
+```
+
