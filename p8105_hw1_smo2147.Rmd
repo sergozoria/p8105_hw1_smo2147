@@ -115,3 +115,17 @@ rsamp_df |>
   mean()
 ```
 
+Let's note convert variables from one type to another
+
+```{r}
+rsamp_df |> 
+  mutate(
+    gt_zero_an = gt_zero |> 
+      as.numeric(),
+    char_vec_an = char_vec |> 
+      as.numeric(),
+    factor_vec_an = factor_vec |> 
+      as.numeric()
+  )
+```
+
